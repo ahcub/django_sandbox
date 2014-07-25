@@ -1,2 +1,1 @@
-add persons requests handling, with different parameters (short location (lat, lon), long location (lat, lon, masl), name)
-add samples for urls
+implement post form for person and building
