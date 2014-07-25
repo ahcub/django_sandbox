@@ -1,0 +1,9 @@
+<h1>Installed apps list:</h1>
+
+<ul>
+    {% for app in installed_apps %}
+        <li><a href="{% url app|add:':index' %}">{{ app }}</a></li>
+    {% empty %}
+        <li>No apps yet.</li>
+    {% endfor %}
+</ul>

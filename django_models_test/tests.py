@@ -1,11 +1,11 @@
 from django.test import TestCase
 
-from django_models_test.models import Person, Location
+from django_models_test.models import Person, PersonLocation
 
 
 def create_person(name, lon, lat, masl):
     p = Person.objects.create(name=name)
-    Location.objects.create(person=p, lon=lon, lat=lat, masl=masl)
+    PersonLocation.objects.create(person=p, lon=lon, lat=lat, masl=masl)
 
 
 class ModelsTest(TestCase):
@@ -20,3 +20,4 @@ class ModelsTest(TestCase):
             create_person(*person)
 
         print(Person.objects.all())
+        print(Person.objects.all()[0].location)
