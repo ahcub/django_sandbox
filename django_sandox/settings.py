@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls',
+    'django_tutorial_app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,9 +48,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'django_sample.urls'
+ROOT_URLCONF = 'django_sandox.urls'
 
-WSGI_APPLICATION = 'django_sample.wsgi.application'
+WSGI_APPLICATION = 'django_sandox.wsgi.application'
 
 
 # Database

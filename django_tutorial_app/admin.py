@@ -1,4 +1,6 @@
 from django.contrib import admin
-from polls.models import Poll
+
+from django_tutorial_app.models import Poll
+
 
 admin.site.register(Poll)
