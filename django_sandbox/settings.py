@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tutorial_app',
+    'django_models_test',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'django_sandox.urls'
+ROOT_URLCONF = 'django_sandbox.urls'
 
-WSGI_APPLICATION = 'django_sandox.wsgi.application'
+WSGI_APPLICATION = 'django_sandbox.wsgi.application'
 
 
 # Database
