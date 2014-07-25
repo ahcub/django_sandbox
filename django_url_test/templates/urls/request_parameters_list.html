@@ -1,0 +1,7 @@
+<ul>
+    {% for name, value in request_args %}
+        <li>{{ name }}: {{ value }}</li>
+    {% empty %}
+        <li>No request arguments</li>
+    {% endfor %}
+</ul>

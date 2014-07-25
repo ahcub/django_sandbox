@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'main',
     'django_tutorial_app',
     'django_models_test',
+    'django_url_test',
 )
 
 MIDDLEWARE_CLASSES = (

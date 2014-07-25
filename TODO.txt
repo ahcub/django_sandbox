@@ -1,1 +1,2 @@
-check not required foreign key model parameter
+add persons requests handling, with different parameters (short location (lat, lon), long location (lat, lon, masl), name)
+add samples for urls
