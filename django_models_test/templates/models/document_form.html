@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="{% url 'django_models_test:document' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<p>{{ form.non_field_errors }}</p>
+<p>{{ form.image_file.label_tag }} {{ form.image_file.help_text }}</p>
+<p>
+    {{ form.image_file.errors }}
+    {{ form.image_file }}
+</p>
+<p><input type="submit" value="Upload" /></p>
+</form>
+</body>
+</html>

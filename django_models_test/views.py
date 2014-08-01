@@ -1,7 +1,10 @@
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views import generic
-from django_models_test.models import Person
+from django_models_test.forms import ImageForm
+from django_models_test.models import Person, Document
 from django_models_test.constanst import *
 
 
@@ -42,3 +45,17 @@ def get_persons_by_name(request, name):
 class PersonsView(generic.ListView):
     model = Person
     template_name = 'models/persons_list.html'
+
+
+def document(request):
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = Document(image=request.FILES['image_file'])
+            image.save()
+
+            return HttpResponseRedirect(reverse('django_models_test:document'))
+    else:
+        form = ImageForm()
+
+    return render(request,'models/document_form.html', {'form': form})

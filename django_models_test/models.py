@@ -30,3 +30,7 @@ class PersonLocation(Location):
 
 class BuildingLocation(Location):
     building = models.ForeignKey(Building, related_name='location')
+
+
+class Document(models.Model):
+    image = models.ImageField(upload_to='images')

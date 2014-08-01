@@ -84,3 +84,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = r'D:\Personal Data\git\django_tutorial'
+MEDIA_URL = r'/media/'
