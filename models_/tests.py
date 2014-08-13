@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from django_models_test.models import Person, PersonLocation
+from models_.models import Person, PersonLocation
 
 
 def create_person(name, lon, lat, masl):

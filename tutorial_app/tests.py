@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from django_tutorial_app.models import Poll
+from tutorial_app.models import Poll
 
 
 class PollMethodTests(TestCase):
@@ -24,8 +24,8 @@ class PollMethodTests(TestCase):
 def create_poll(question, days):
     """
     Creates a poll with the given `question` published the given number of
-    `days` offset to now (negative for django_tutorial_app published in the past,
-    positive for django_tutorial_app that have yet to be published).
+    `days` offset to now (negative for tutorial_app published in the past,
+    positive for tutorial_app that have yet to be published).
     """
     return Poll.objects.create(question=question,
                                pub_date=timezone.now() + datetime.timedelta(days=days))
@@ -34,11 +34,11 @@ def create_poll(question, days):
 class PollViewTests(TestCase):
     def test_index_view_with_no_polls(self):
         """
-        If no django_tutorial_app exist, an appropriate message should be displayed.
+        If no tutorial_app exist, an appropriate message should be displayed.
         """
-        response = self.client.get(reverse('django_tutorial_app:index'))
+        response = self.client.get(reverse('tutorial_app:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No django_tutorial_app are available.")
+        self.assertContains(response, "No tutorial_app are available.")
         self.assertQuerysetEqual(response.context['latest_poll_list'], [])
 
     def test_index_view_with_a_past_poll(self):
@@ -46,7 +46,7 @@ class PollViewTests(TestCase):
         Polls with a pub_date in the past should be displayed on the index page.
         """
         create_poll(question="Past poll.", days=-30)
-        response = self.client.get(reverse('django_tutorial_app:index'))
+        response = self.client.get(reverse('tutorial_app:index'))
         self.assertQuerysetEqual(
             response.context['latest_poll_list'],
             ['<Poll: Past poll.>']
@@ -58,18 +58,18 @@ class PollViewTests(TestCase):
         index page.
         """
         create_poll(question="Future poll.", days=30)
-        response = self.client.get(reverse('django_tutorial_app:index'))
-        self.assertContains(response, "No django_tutorial_app are available.", status_code=200)
+        response = self.client.get(reverse('tutorial_app:index'))
+        self.assertContains(response, "No tutorial_app are available.", status_code=200)
         self.assertQuerysetEqual(response.context['latest_poll_list'], [])
 
     def test_index_view_with_future_poll_and_past_poll(self):
         """
-        Even if both past and future django_tutorial_app exist, only past django_tutorial_app should be
+        Even if both past and future tutorial_app exist, only past tutorial_app should be
         displayed.
         """
         create_poll(question="Past poll.", days=-30)
         create_poll(question="Future poll.", days=30)
-        response = self.client.get(reverse('django_tutorial_app:index'))
+        response = self.client.get(reverse('tutorial_app:index'))
         self.assertQuerysetEqual(
             response.context['latest_poll_list'],
             ['<Poll: Past poll.>']
@@ -77,11 +77,11 @@ class PollViewTests(TestCase):
 
     def test_index_view_with_two_past_polls(self):
         """
-        The django_tutorial_app index page may display multiple django_tutorial_app.
+        The tutorial_app index page may display multiple tutorial_app.
         """
         create_poll(question="Past poll 1.", days=-30)
         create_poll(question="Past poll 2.", days=-5)
-        response = self.client.get(reverse('django_tutorial_app:index'))
+        response = self.client.get(reverse('tutorial_app:index'))
         self.assertQuerysetEqual(
             response.context['latest_poll_list'],
             ['<Poll: Past poll 2.>', '<Poll: Past poll 1.>']
@@ -95,7 +95,7 @@ class PollIndexDetailTests(TestCase):
         return a 404 not found.
         """
         future_poll = create_poll(question='Future poll.', days=5)
-        response = self.client.get(reverse('django_tutorial_app:detail', args=(future_poll.id,)))
+        response = self.client.get(reverse('tutorial_app:detail', args=(future_poll.id,)))
         self.assertEqual(response.status_code, 404)
 
     def test_detail_view_with_a_past_poll(self):
@@ -104,5 +104,5 @@ class PollIndexDetailTests(TestCase):
         the poll's question.
         """
         past_poll = create_poll(question='Past Poll.', days=-5)
-        response = self.client.get(reverse('django_tutorial_app:detail', args=(past_poll.id,)))
+        response = self.client.get(reverse('tutorial_app:detail', args=(past_poll.id,)))
         self.assertContains(response, past_poll.question, status_code=200)

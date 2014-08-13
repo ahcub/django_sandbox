@@ -2,10 +2,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
-from django.views import generic
-from django_models_test.forms import ImageForm
-from django_models_test.models import Person, Document
-from django_models_test.constanst import *
+from models_.forms import ImageForm
+from models_.models import Person, Document
+from models_.constanst import *
 
 
 def get_persons(request):
@@ -18,7 +17,7 @@ def get_persons(request):
             lat = float(request.GET['lat'])
             masl = request.GET.get('masl', None)
         except MultiValueDictKeyError:
-            return PersonsView.as_view()
+            return render(request, 'models/persons_list.html', {'object_list': Person.objects.all()})
         else:
             get_persons_by_location(request, lon, lat, masl)
 
@@ -42,11 +41,6 @@ def get_persons_by_name(request, name):
     return render(request, 'models/persons_list.html', context)
 
 
-class PersonsView(generic.ListView):
-    model = Person
-    template_name = 'models/persons_list.html'
-
-
 def document(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -54,8 +48,12 @@ def document(request):
             image = Document(image=request.FILES['image_file'])
             image.save()
 
-            return HttpResponseRedirect(reverse('django_models_test:document'))
+            return HttpResponseRedirect(reverse('models_:document'))
     else:
         form = ImageForm()
 
-    return render(request,'models/document_form.html', {'form': form})
+    return render(request, 'models/document_form.html', {'form': form})
+
+
+def index(request):
+    return render(request, 'models/index.html', {'urls_list': urlpatterns})

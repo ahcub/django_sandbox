@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
-from django_models_test import views
-from django_models_test.views import PersonsView
+from models_ import views
+from models_.views import PersonsView
 
 urlpatterns = patterns(
     '',

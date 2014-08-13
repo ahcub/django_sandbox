@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from django_tutorial_app.models import Poll, Choice
+from tutorial_app.models import Poll, Choice
 
 
 class ChoiceInline(admin.StackedInline):

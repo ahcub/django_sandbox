@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views import generic
 
-from django_tutorial_app.models import Poll, Choice
+from tutorial_app.models import Poll, Choice
 
 
 class IndexView(generic.ListView):
@@ -12,7 +12,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_poll_list'
 
     def get_queryset(self):
-        """Return the last five published django_tutorial_app."""
+        """Return the last five published tutorial_app."""
         return Poll.objects.filter(
             pub_date__lte=timezone.now()
         ).order_by('-pub_date')[:5]
@@ -24,7 +24,7 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         """
-        Excludes any django_tutorial_app that aren't published yet.
+        Excludes any tutorial_app that aren't published yet.
         """
         return Poll.objects.filter(pub_date__lte=timezone.now())
 

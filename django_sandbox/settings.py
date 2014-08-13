@@ -37,9 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'django_tutorial_app',
-    'django_models_test',
-    'django_url_test',
+    'tutorial_app',
+    'models_',
+    'urls_',
 )
 
 MIDDLEWARE_CLASSES = (
