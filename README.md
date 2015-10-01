@@ -1,4 +1,4 @@
-django_sandbox
+Django sandbox
 ==============
 
 django sandbox project
